@@ -52,8 +52,8 @@ class Login extends React.Component {
     console.log(toMatch);
     const userName = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
 
-    alert(`Login Succesful! Your user name is  ${userName}`);
     event.preventDefault();
+    console.log(`Login Succesful! Your user name is  ${userName}`);
   }
 
   render() {
