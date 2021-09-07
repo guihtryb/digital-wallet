@@ -6,9 +6,9 @@ form {
 form input {
   border: 1px solid dimgray;
   border-radius: 5px;
+  height: 25px;
   margin: 5px 15px;
   padding: 10px;
-  height: 25px;
   width: 240px;
 }
 
