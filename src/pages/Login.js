@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../Styles/Login.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { UserLogin } from '../actions/index';
 import LoginLogo from '../Login.png';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +16,7 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validForm = this.validForm.bind(this);
+    this.sendLogin = this.sendLogin.bind(this);
   }
 
   validForm() {
@@ -35,26 +39,29 @@ class Login extends React.Component {
     }
   }
 
+  sendLogin() {
+    const { email } = this.state;
+
+    const { history, UserLoginAction } = this.props;
+    UserLoginAction(email);
+    history.push('/carteira');
+  }
+
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({
       [name]: value,
     });
-    // this.validForm();
   }
-
-  // lert('Fire in the hole');
 
   handleSubmit(event) {
     const { email } = this.state;
 
     const toMatch = email.indexOf('@');
-    console.log(toMatch);
     const userName = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
 
-    event.preventDefault();
     console.log(`Login Succesful! Your user name is >> ${userName}`);
-    history.push('/carteira');
+    event.preventDefault();
   }
 
   render() {
@@ -81,11 +88,26 @@ class Login extends React.Component {
             onKeyUp={ this.validForm }
             placeholder="Password"
           />
-          <button type="submit" disabled={ disabled }>Entrar</button>
+          <button
+            type="submit"
+            disabled={ disabled }
+            onClick={ this.sendLogin }
+          >
+            Entrar
+          </button>
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  UserLoginAction: (email) => dispatch(UserLogin(email)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  UserLoginAction: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.string).isRequired,
+};

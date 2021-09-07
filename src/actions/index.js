@@ -1,10 +1,11 @@
 // Coloque aqui suas actions
+export const LOGIN = 'LOGIN';
 
-const LOGIN = (email) => ({
-  type: 'LOGIN',
-  user: {
-    email,
-  },
-});
-
-export default LOGIN;
+export function UserLogin(email) {
+  return ({
+    type: LOGIN,
+    user: {
+      email,
+    },
+  });
+}
