@@ -4,12 +4,12 @@ form {
 }
 
 form input {
-  border: 1px solid rgb(105, 105, 105);
+  border: 1px solid dimgray;
   border-radius: 5px;
   margin: 5px 15px;
   padding: 10px;
-  width: 240px;
   height: 25px;
+  width: 240px;
 }
 
 form button {
@@ -33,6 +33,7 @@ form input:focus {
   border-radius: 5px;
   outline: seagreen;
 }
+
 .login-container {
   align-items: center;
   display: flex;
