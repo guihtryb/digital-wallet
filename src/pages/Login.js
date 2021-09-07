@@ -53,7 +53,8 @@ class Login extends React.Component {
     const userName = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
 
     event.preventDefault();
-    console.log(`Login Succesful! Your user name is  ${userName}`);
+    console.log(`Login Succesful! Your user name is >> ${userName}`);
+    history.push('/carteira');
   }
 
   render() {
@@ -69,6 +70,7 @@ class Login extends React.Component {
             value={ email }
             onChange={ this.handleChange }
             onKeyUp={ this.validForm }
+            placeholder="Email"
           />
           <input
             data-testid="password-input"
@@ -77,6 +79,7 @@ class Login extends React.Component {
             value={ password }
             onChange={ this.handleChange }
             onKeyUp={ this.validForm }
+            placeholder="Password"
           />
           <button type="submit" disabled={ disabled }>Entrar</button>
         </form>
