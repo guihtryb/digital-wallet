@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserLogin } from '../actions/index';
 import LoginLogo from '../Login.png';
+import store from '../store';
 
 class Login extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class Login extends Component {
     const { history, UserLoginAction } = this.props;
     UserLoginAction(email);
     history.push('/carteira');
+    console.log(store.getState());
   }
 
   handleChange({ target }) {
