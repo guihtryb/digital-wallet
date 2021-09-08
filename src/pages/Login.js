@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserLogin } from '../actions/index';
 import LoginLogo from '../Login.png';
-import store from '../store';
 
 class Login extends Component {
   constructor(props) {
@@ -44,9 +43,13 @@ class Login extends Component {
     const { email } = this.state;
 
     const { history, UserLoginAction } = this.props;
+
+    // const toMatch = email.indexOf('@');
+    // const user = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
+
     UserLoginAction(email);
+
     history.push('/carteira');
-    console.log(store.getState());
   }
 
   handleChange({ target }) {
@@ -57,12 +60,6 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    const { email } = this.state;
-
-    const toMatch = email.indexOf('@');
-    const userName = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
-
-    console.log(`Login Succesful! Your user name is >> ${userName}`);
     event.preventDefault();
   }
 

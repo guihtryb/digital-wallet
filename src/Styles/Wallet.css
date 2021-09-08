@@ -1,0 +1,41 @@
+.header-container {
+  align-items: center;
+  background-color: white;
+  border-bottom: 2px solid seagreen;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 6px rgba(0, 100, 0, 0.6);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+.header-container img {
+    display: flex;
+    height: 70px;
+    width: 195px;
+  }
+
+span:hover , .currency-container:hover {
+  color: seagreen;
+}
+
+#user-name:before {
+  content: 'User »';
+  display: inline-block;
+  flex-wrap: wrap;
+  font-size: 15px;
+  opacity: 0;
+  transition: 1.5s;
+}
+
+#user-name:hover {
+  background-color: seagreen;
+  border: 3px dashed black;
+  border-radius: 6px;
+  color: black;
+  padding: 10px;
+  transition: 1s;
+}
+
+#user-name:hover:before{
+  opacity: 1;
+}
