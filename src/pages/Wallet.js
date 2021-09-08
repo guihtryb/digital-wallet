@@ -32,11 +32,43 @@ class Wallet extends React.Component {
           {email ? <span id="user-name">{this.createLogin()}</span> : null}
           <img src={ headerLogo } alt="header logo" />
           <span data-testid="email-field">{`Email: ${email}`}</span>
-          <div className="currency-container">
-            <span data-testid="total-field">{`Despesa Total: R$ ${despesas} `}</span>
-            <span data-testid="header-currency-field">BRL</span>
-          </div>
+          <span data-testid="total-field">{`Despesa Total: R$ ${despesas} `}</span>
+          <span data-testid="header-currency-field">BRL</span>
         </header>
+        <form>
+          <label htmlFor="value-input">
+            Valor
+            <input type="number" id="value-input" name="value" />
+          </label>
+          <label htmlFor="description-input">
+            Descrição
+            <input type="text" id="description-input" name="description" />
+          </label>
+          <label htmlFor="currency-select">
+            Moeda
+            <select id="currency-select" name="currency">
+              {' '}
+            </select>
+          </label>
+          <label htmlFor="payment-select">
+            Método de pagamento
+            <select id="payment-select" name="payment-select">
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Credito">Cartão de crédito</option>
+              <option value="Debito">Cartão de débito</option>
+            </select>
+          </label>
+          <label htmlFor="tag-select">
+            Tag
+            <select id="tag-select" name="payment-select">
+              <option value="Alimentacao">Alimentacao</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Trasporte">Trasporte</option>
+              <option value="Saúde">Saúde</option>
+            </select>
+          </label>
+        </form>
       </div>
     );
   }
