@@ -16,17 +16,6 @@ form input , button {
   width: 240px;
 }
 
-form button {
-  background-color: rgb(0, 175, 76);
-  border-radius: 5px;
-  color: white;
-  font-size: 23px;
-  font-weight: 700;
-  margin: 10px 15px;
-  padding: 12px;
-  width: 264px;
-}
-
 .login-input:hover {
   border: 1px solid seagreen;
 }
@@ -46,4 +35,15 @@ form button {
   display: flex;
   flex-grow: 2;
   width: 350px;
+}
+
+.login-button {
+  background-color: rgb(0, 175, 76);
+  border-radius: 5px;
+  color: white;
+  font-size: 23px;
+  font-weight: 700;
+  margin: 10px 15px;
+  padding: 12px;
+  width: 264px; 
 }

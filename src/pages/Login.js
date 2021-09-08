@@ -44,9 +44,6 @@ class Login extends Component {
 
     const { history, UserLoginAction } = this.props;
 
-    // const toMatch = email.indexOf('@');
-    // const user = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
-
     UserLoginAction(email);
 
     history.push('/carteira');
@@ -91,6 +88,7 @@ class Login extends Component {
           />
           <button
             type="submit"
+            className="login-button"
             disabled={ disabled }
             onClick={ this.sendLogin }
           >

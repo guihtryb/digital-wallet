@@ -25,14 +25,17 @@ span:hover , .currency-container:hover {
   color: rgb(195, 198, 201);
   display: flex;
   flex-flow: row wrap;
-  font-size: 18px;
+  font-size: 19px;
   justify-content: center;
-  margin: 20px 10px;
+  margin: 20px 0;
   padding: 20px;
 }
 
 .wallet-container input {
+  border: none;
+  border-radius: 6px;
   margin: 10px 15px;
+  padding: 10px;
 }
 
 select {

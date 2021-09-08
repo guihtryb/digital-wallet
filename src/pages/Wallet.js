@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../Styles/Wallet.css';
+import Currency from '../Components/Currency';
+import headerLogo from '../headerLogo.jpg';
 
 class Wallet extends React.Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class Wallet extends React.Component {
     };
     this.createLogin = this.createLogin.bind(this);
     this.fetchRequisition = this.fetchRequisition.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,53 +41,33 @@ class Wallet extends React.Component {
     });
   }
 
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
     const { despesas, currencys } = this.state;
     const { email } = this.props;
+    const toMatch = email.indexOf('@');
+    let user;
+    if (email) {
+      user = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
+    }
     return (
       <div>
         <header className="header-container">
+          <span>{ user }</span>
+          <img src={ headerLogo } alt="header Logo" />
           <span data-testid="email-field">{`Email: ${email}`}</span>
-          <span data-testid="total-field">{`Despesa Total: R$ ${despesas} `}</span>
-          <span data-testid="header-currency-field">BRL</span>
+          <div>
+            <span data-testid="total-field">{`Despesa Total: R$ ${despesas} `}</span>
+            <span data-testid="header-currency-field">BRL</span>
+          </div>
         </header>
-        <form className="wallet-container">
-          <label htmlFor="value-input">
-            Valor
-            <input type="number" id="value-input" name="value" />
-          </label>
-          <label htmlFor="description-input">
-            Descrição
-            <input type="text" id="description-input" name="description" />
-          </label>
-          <label htmlFor="currency-select">
-            Moeda
-            <select id="currency-select" name="currency">
-              {currencys.map(({ code, name }) => (
-                <option key={ name }>
-                  { code }
-                </option>))}
-            </select>
-          </label>
-          <label htmlFor="payment-select">
-            Método de pagamento
-            <select id="payment-select" name="payment-select">
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Credito">Cartão de crédito</option>
-              <option value="Debito">Cartão de débito</option>
-            </select>
-          </label>
-          <label htmlFor="tag-select">
-            Tag
-            <select id="tag-select" name="payment-select">
-              <option value="Alimentacao">Alimentação</option>
-              <option value="Lazer">Lazer</option>
-              <option value="Trabalho">Trabalho</option>
-              <option value="Trasporte">Transporte</option>
-              <option value="Saúde">Saúde</option>
-            </select>
-          </label>
-        </form>
+        <Currency currencys={ currencys } />
       </div>
     );
   }
