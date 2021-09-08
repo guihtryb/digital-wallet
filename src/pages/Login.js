@@ -71,6 +71,7 @@ class Login extends Component {
         <form onSubmit={ this.handleSubmit }>
           <input
             data-testid="email-input"
+            className="login-input"
             type="email"
             name="email"
             value={ email }
@@ -80,6 +81,7 @@ class Login extends Component {
           />
           <input
             data-testid="password-input"
+            className="login-input"
             type="password"
             name="password"
             value={ password }

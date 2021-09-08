@@ -20,20 +20,19 @@ span:hover , .currency-container:hover {
 }
 
 .wallet-container {
+  align-items: center;
   background-color: rgb(21, 21, 21);
   color: rgb(195, 198, 201);
   display: flex;
   flex-flow: row wrap;
   font-size: 18px;
   justify-content: center;
-  align-items: center;
   margin: 20px 10px;
   padding: 20px;
-
 }
 
-.wallet-container label {
-  margin: 0 5px;
+.wallet-container input {
+  margin: 10px 15px;
 }
 
 select {

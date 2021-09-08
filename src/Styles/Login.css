@@ -7,7 +7,7 @@ form input , button {
   text-align: center;
 }
 
-form input {
+.login-input {
   border: 1px solid dimgray;
   border-radius: 5px;
   height: 25px;
@@ -27,11 +27,11 @@ form button {
   width: 264px;
 }
 
-form input:hover {
+.login-input:hover {
   border: 1px solid seagreen;
 }
 
-form input:focus {
+.login-input:focus {
   border: 3px solid seagreen;
   outline: seagreen;
 }
