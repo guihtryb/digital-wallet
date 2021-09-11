@@ -48,7 +48,8 @@ class Wallet extends React.Component {
           <span data-testid="email-field">{`Email: ${email}`}</span>
           <div className="expenses-container">
             <span data-testid="total-field">
-              {despesas ? `Despesa Total: R$ ${despesas} ` : `Despesa Total: R$ ${initial} ` }
+              {despesas
+                ? `Despesa Total: R$ ${despesas} ` : `Despesa Total: R$ ${initial} ` }
             </span>
             <span data-testid="header-currency-field">BRL</span>
           </div>
@@ -68,4 +69,5 @@ export default connect(mapStateToProps)(Wallet);
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
+  despesas: PropTypes.number.isRequired,
 };
