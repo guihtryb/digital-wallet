@@ -11,11 +11,12 @@ export function UserLogin(email) {
   });
 }
 
-export function walletExpenses(expenses) {
+export function walletExpenses(expenses, despesas) {
   return ({
     type: ADD_EXPENSE,
     wallet: {
-      expenses: [expenses],
+      expenses,
     },
+    despesas,
   });
 }

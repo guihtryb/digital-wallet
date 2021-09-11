@@ -10,16 +10,11 @@ class Wallet extends React.Component {
     super(props);
 
     this.state = {
-      despesas: 0,
-      currencys: [],
+      initial: 0,
     };
-    this.createLogin = this.createLogin.bind(this);
-    this.fetchRequisition = this.fetchRequisition.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  componentDidMount() {
-    this.fetchRequisition();
+    this.createLogin = this.createLogin.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   createLogin() {
@@ -30,17 +25,6 @@ class Wallet extends React.Component {
     return user;
   }
 
-  async fetchRequisition() {
-    const awesomeApi = 'https://economia.awesomeapi.com.br/json/all';
-    const response = await fetch(awesomeApi);
-    const data = await response.json();
-    const coins = Object.values(data);
-    const getCoins = coins.filter((coin) => coin.codein !== 'BRLT');
-    this.setState({
-      currencys: getCoins,
-    });
-  }
-
   handleChange({ target }) {
     const { name, value } = target;
     this.setState({
@@ -49,8 +33,8 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { despesas, currencys } = this.state;
-    const { email } = this.props;
+    const { initial } = this.state;
+    const { email, despesas } = this.props;
     const toMatch = email.indexOf('@');
     let user;
     if (email) {
@@ -62,12 +46,14 @@ class Wallet extends React.Component {
           <span>{ user }</span>
           <img src={ headerLogo } alt="header Logo" />
           <span data-testid="email-field">{`Email: ${email}`}</span>
-          <div>
-            <span data-testid="total-field">{`Despesa Total: R$ ${despesas} `}</span>
+          <div className="expenses-container">
+            <span data-testid="total-field">
+              {despesas ? `Despesa Total: R$ ${despesas} ` : `Despesa Total: R$ ${initial} ` }
+            </span>
             <span data-testid="header-currency-field">BRL</span>
           </div>
         </header>
-        <Currency currencys={ currencys } />
+        <Currency />
       </div>
     );
   }
@@ -75,6 +61,7 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  despesas: state.wallet.despesas,
 });
 
 export default connect(mapStateToProps)(Wallet);
