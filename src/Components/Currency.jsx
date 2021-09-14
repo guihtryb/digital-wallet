@@ -18,7 +18,6 @@ class Currency extends Component {
       tag: 'Alimentação',
       exchangeRates: {},
       despesas: 0,
-      clicked: [],
     };
     this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
     this.chang = this.chang.bind(this);
@@ -49,9 +48,7 @@ class Currency extends Component {
   AddExpenseHelper() {
     const { expensesAction } = this.props;
     const { value,
-      clicked,
       currency, exchangeRates, id, description, method, tag, despesas } = this.state;
-    clicked.push(id);
     expensesAction({ id, description, method, tag, value, currency, exchangeRates },
       despesas);
   }
@@ -59,7 +56,6 @@ class Currency extends Component {
   async addExpense() {
     this.exchangeRatesRequisition();
     const precision = 100;
-    this.now = [];
     const { value, currency, exchangeRates, despesas, id } = this.state;
     const correctlyCurrency = Object.values(exchangeRates)
       .filter((rate) => rate.code === currency);
@@ -92,14 +88,6 @@ class Currency extends Component {
     });
   }
 
-  deleteExpensesHelper() {
-    const { expensesAction } = this.props;
-    const { value,
-      currency, exchangeRates, id, description, method, tag, despesas } = this.state;
-    expensesAction({ id, description, method, tag, value, currency, exchangeRates },
-      despesas);
-  }
-
   async deleteExpense(e) {
     e.target.parentNode.parentNode.remove();
     const { currency, value, despesas, exchangeRates } = this.state;
@@ -117,7 +105,7 @@ class Currency extends Component {
       }));
     }
 
-    await this.setState((prevState) => ({
+    this.setState((prevState) => ({
       ...prevState,
       despesas: calc,
     }));
@@ -193,18 +181,21 @@ class Currency extends Component {
   }
 
   render() {
-    const { clicked } = this.state;
+    const { expenses } = this.props;
     return (
       <div>
         {this.renderAddExpenses()}
         <table className="expenses-table">
           { this.renderExpenseHeader() }
-          { clicked.map((click) => (<ExpensesTable
-            id={ click }
-            key={ click }
+          { expenses.map((expense) => (<ExpensesTable
+            expense={ expense }
+            key={ expense.id }
             deleteExpenses={ this.deleteExpense }
           />))}
         </table>
+        <button type="button" data-testid="delete-btn" onClick={ this.deleteExpense }>
+          Deletar
+        </button>
       </div>
     );
   }
@@ -214,8 +205,13 @@ const mapDispatchToProps = (dispatch) => ({
   expensesAction: (expenses, despesas) => dispatch(walletExpenses(expenses, despesas)),
 });
 
-export default connect(null, mapDispatchToProps)(Currency);
+const mapStateToProps = (state) => ({
+  expenses: state.wallet.expenses,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Currency);
 
 Currency.propTypes = {
   expensesAction: PropTypes.func.isRequired,
+  expenses: PropTypes.objectOf(String).isRequired,
 };

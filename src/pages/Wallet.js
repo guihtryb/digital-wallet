@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '../Styles/Wallet.css';
 import Currency from '../Components/Currency';
 import headerLogo from '../headerLogo.jpg';
-import ExpensesTable from '../Components/ExpensesTable';
 
 class Wallet extends React.Component {
   constructor(props) {

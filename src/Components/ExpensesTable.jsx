@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import '../Styles/ExpensesTable.css';
 
 class ExpensesTable extends Component {
-  constructor() {
-    super();
-    this.renderExpensesInfos = this.renderExpensesInfos.bind(this);
-  }
-
-  renderExpensesInfos(expenses, deleteExpenses, ...index) {
-    const infos = expenses[index];
+  render() {
+    const { deleteExpenses } = this.props;
+    const { expense: { exchangeRates,
+      currency, description, tag, method, value } } = this.props;
     const changes = {
       USD: 'Dólar Comercial',
       CAD: 'Dólar Canadense',
@@ -27,26 +24,25 @@ class ExpensesTable extends Component {
       ETH: 'Ethereum',
       XRP: 'Riple',
     };
-    if (infos) {
-      const correctlyCurrency = Object.values(infos.exchangeRates)
-        .filter((rate) => rate.code === infos.currency);
-      const expense = Number(infos.value) * correctlyCurrency[0].ask;
-      const precision = 100;
-      const correctExpense = parseInt(expense * precision, 10) / precision;
-      const cambio = Object.values(infos.exchangeRates)
-        .filter((exc) => exc.code === infos.currency)[0].ask;
-      const tableInfos = [
-        <td key={ 0 }>{infos.description}</td>,
-        <td key={ 1 }>{infos.tag }</td>,
-        <td key={ 2 }>{infos.method }</td>,
-        <td key={ 3 }>{`${parseInt(infos.value, 10)}`}</td>,
-        <td key={ 4 }>{changes[infos.currency]}</td>,
-        <td key={ 5 }>{parseFloat(cambio).toFixed(2)}</td>,
-        <td id="value" key={ 6 }>{correctExpense}</td>,
-        <td key={ 7 }>Real</td>,
-        <td key={ 8 }>
+    const currencies = Object.values(exchangeRates);
+    const correctCurrency = currencies.filter((curr) => curr.code === currency);
+    const calc = Number(value) * correctCurrency[0].ask;
+    const precision = 100;
+    const correctExpense = parseInt(calc * precision, 10) / precision;
+    const cambio = currencies.filter((exc) => exc.code === currency)[0].ask;
+
+    return (
+      <tr>
+        <td>{description}</td>
+        <td>{tag }</td>
+        <td>{method }</td>
+        <td>{`${parseInt(value, 10)}`}</td>
+        <td>{changes[currency]}</td>
+        <td>{parseFloat(cambio).toFixed(2)}</td>
+        <td>{correctExpense}</td>
+        <td>Real</td>
+        <td>
           <button
-            name={ index }
             type="button"
             data-testid="delete-btn"
             className="delete-button"
@@ -54,32 +50,15 @@ class ExpensesTable extends Component {
           >
             Delete
           </button>
-        </td>,
-      ];
-      return tableInfos;
-    }
-  }
-
-  render() {
-    const { expenses, deleteExpenses, id } = this.props;
-
-    return (
-      <tr>
-        { this.renderExpensesInfos(expenses, deleteExpenses, id) }
+        </td>
       </tr>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  despesas: state.wallet.despesas,
-  expenses: state.wallet.expenses,
-});
-
-export default connect(mapStateToProps)(ExpensesTable);
+export default connect(null)(ExpensesTable);
 
 ExpensesTable.propTypes = {
-  id: PropTypes.number.isRequired,
-  expenses: PropTypes.objectOf(String).isRequired,
   deleteExpenses: PropTypes.func.isRequired,
+  expense: PropTypes.objectOf(String).isRequired,
 };
