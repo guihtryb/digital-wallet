@@ -9,10 +9,6 @@ class Wallet extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      initial: 0,
-    };
-
     this.createLogin = this.createLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -21,7 +17,6 @@ class Wallet extends React.Component {
     const { email } = this.props;
     const toMatch = email.indexOf('@');
     const user = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
-
     return user;
   }
 
@@ -33,7 +28,6 @@ class Wallet extends React.Component {
   }
 
   render() {
-    const { initial } = this.state;
     const { email, despesas } = this.props;
     const toMatch = email.indexOf('@');
     let user;
@@ -41,17 +35,16 @@ class Wallet extends React.Component {
       user = `_${email[0].toUpperCase()}${email.substr(1, toMatch - 1)}_`;
     }
     return (
-      <div>
+      <div className="wallet-style">
         <header className="header-container">
           <span>{ user }</span>
           <img src={ headerLogo } alt="header Logo" />
           <span data-testid="email-field">{`Email: ${email}`}</span>
           <div className="expenses-container">
             <span data-testid="total-field">
-              {despesas
-                ? `Despesa Total: R$ ${despesas} ` : `Despesa Total: R$ ${initial} ` }
+              {`Despesa Total: R$ ${!despesas ? 0 : despesas}` }
             </span>
-            <span data-testid="header-currency-field">BRL</span>
+            <span data-testid="header-currency-field"> BRL</span>
           </div>
         </header>
         <Currency />
@@ -63,6 +56,7 @@ class Wallet extends React.Component {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   despesas: state.wallet.despesas,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps)(Wallet);

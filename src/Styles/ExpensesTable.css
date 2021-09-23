@@ -1,14 +1,14 @@
 .expenses-table th {
-  border: 1px solid #646464;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
   border-radius: 6px;
-  color: black;
   padding: 15px 20px;
   white-space: pre-wrap;
   width: 70%;
 }
 
 .expenses-table td {
-  background-color: rgb(94, 170, 127);
+  border: 1px solid #212121;
   border-radius: 4px;
   padding: 10px 20px;
   text-align: center;

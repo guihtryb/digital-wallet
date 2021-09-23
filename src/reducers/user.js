@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
-const LOGIN = 'LOGIN';
+import { LOGIN } from '../actions';
 
 const INITIAL_STATE = {
   email: '',

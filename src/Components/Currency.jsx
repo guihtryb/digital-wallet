@@ -17,7 +17,6 @@ class Currency extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       exchangeRates: {},
-      despesas: 0,
     };
     this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
     this.chang = this.chang.bind(this);
@@ -26,8 +25,6 @@ class Currency extends Component {
     this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
     this.renderAddExpenses = this.renderAddExpenses.bind(this);
     this.renderExpenseHeader = this.renderExpenseHeader.bind(this);
-    this.deleteExpense = this.deleteExpense.bind(this);
-    this.deleteExpenseHelper = this.AddExpenseHelper.bind(this);
   }
 
   componentDidMount() {
@@ -41,44 +38,6 @@ class Currency extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  AddExpenseHelper() {
-    const { expensesAction } = this.props;
-    const { value,
-      currency, exchangeRates, id, description, method, tag, despesas } = this.state;
-    expensesAction({ id, description, method, tag, value, currency, exchangeRates },
-      despesas);
-  }
-
-  async addExpense() {
-    this.exchangeRatesRequisition();
-    const precision = 100;
-    const { value, currency, exchangeRates, despesas, id } = this.state;
-    const correctlyCurrency = Object.values(exchangeRates)
-      .filter((rate) => rate.code === currency);
-    const expense = Number(value) * correctlyCurrency[0].ask;
-    const calc = (parseInt(despesas * precision, 10)
-    + parseInt(expense * precision, 10)) / precision;
-    if (calc < 0) {
-      return this.setState((prevState) => ({
-        ...prevState,
-        despesas: 0,
-      }));
-    }
-
-    await this.setState((prevState) => ({
-      ...prevState,
-      despesas: calc,
-    }));
-
-    this.setState(({
-      id: id + 1,
-    }), this.AddExpenseHelper());
-  }
-
   async exchangeRatesRequisition() {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const data = await response.json();
@@ -88,29 +47,43 @@ class Currency extends Component {
     });
   }
 
-  async deleteExpense(e) {
-    e.target.parentNode.parentNode.remove();
-    const { currency, value, despesas, exchangeRates } = this.state;
-    const correctlyCurrency = await Object.values(exchangeRates)
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  AddExpenseHelper() {
+    const { walletAction, despesas } = this.props;
+    const { value,
+      currency, id, description, method, tag, exchangeRates } = this.state;
+    walletAction({ id,
+      description,
+      method,
+      tag,
+      value,
+      currency,
+      exchangeRates,
+      despesas });
+  }
+
+  async addExpense() {
+    await this.exchangeRatesRequisition();
+    const precision = 100;
+    const { walletAction, despesas } = this.props;
+    const { value, currency, exchangeRates, id } = this.state;
+    const correctlyCurrency = Object.values(exchangeRates)
       .filter((rate) => rate.code === currency);
     const expense = Number(value) * correctlyCurrency[0].ask;
-    const precision = 100;
     const calc = (parseInt(despesas * precision, 10)
-    - parseInt(expense * precision, 10)) / precision;
+    + parseInt(expense * precision, 10)) / precision;
 
-    if (calc < 0) {
-      return this.setState((prevState) => ({
-        ...prevState,
-        despesas: 0,
-      }));
-    }
+    console.log(calc);
+    const { description, method, tag } = this.state;
+    walletAction({ id, description, method, tag, value, currency, exchangeRates },
+      calc);
 
-    this.setState((prevState) => ({
-      ...prevState,
-      despesas: calc,
+    this.setState(({
+      id: id + 1,
     }));
-
-    this.deleteExpensesHelper();
   }
 
   renderAddExpenses() {
@@ -182,6 +155,7 @@ class Currency extends Component {
 
   render() {
     const { expenses } = this.props;
+    const { despesas } = this.props;
     return (
       <div>
         {this.renderAddExpenses()}
@@ -190,28 +164,27 @@ class Currency extends Component {
           { expenses.map((expense) => (<ExpensesTable
             expense={ expense }
             key={ expense.id }
-            deleteExpenses={ this.deleteExpense }
+            despesas={ despesas }
           />))}
         </table>
-        <button type="button" data-testid="delete-btn" onClick={ this.deleteExpense }>
-          Deletar
-        </button>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  expensesAction: (expenses, despesas) => dispatch(walletExpenses(expenses, despesas)),
+  walletAction: (expenses, despesas) => dispatch(walletExpenses(expenses, despesas)),
 });
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  despesas: state.wallet.despesas,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Currency);
 
 Currency.propTypes = {
-  expensesAction: PropTypes.func.isRequired,
   expenses: PropTypes.objectOf(String).isRequired,
+  walletAction: PropTypes.func.isRequired,
+  despesas: PropTypes.number.isRequired,
 };
