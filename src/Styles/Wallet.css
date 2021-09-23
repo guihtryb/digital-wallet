@@ -43,6 +43,6 @@ select {
 }
 
 .wallet-style {
-  background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(124, 236, 161));
+  background-image: linear-gradient(to right, white, rgb(124, 236, 161));
   margin: 0;
 }
