@@ -12,23 +12,21 @@ export function UserLogin(email) {
   });
 }
 
-export function walletExpenses(expenses, despesas) {
+export function walletExpenses(expenses) {
   return ({
     type: ADD_EXPENSE,
     wallet: {
       expenses,
-      despesas,
     },
   });
 }
 
 // stackOverflow https://stackoverflow.com/questions/37777525/delete-an-item-from-redux-state/37777800
-export function deleteExpenseAction(expenses, despesas) {
+export function deleteExpenseAction(expenses) {
   return ({
     type: DELETE_EXPENSE,
     wallet: {
       expenses,
-      despesas,
     },
   });
 }

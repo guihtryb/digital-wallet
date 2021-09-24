@@ -52,7 +52,7 @@ class Currency extends Component {
   }
 
   AddExpenseHelper() {
-    const { walletAction, despesas } = this.props;
+    const { walletAction } = this.props;
     const { value,
       currency, id, description, method, tag, exchangeRates } = this.state;
     walletAction({ id,
@@ -62,24 +62,16 @@ class Currency extends Component {
       value,
       currency,
       exchangeRates,
-      despesas });
+    });
   }
 
   async addExpense() {
     await this.exchangeRatesRequisition();
-    const precision = 100;
-    const { walletAction, despesas } = this.props;
+    const { walletAction } = this.props;
     const { value, currency, exchangeRates, id } = this.state;
-    const correctlyCurrency = Object.values(exchangeRates)
-      .filter((rate) => rate.code === currency);
-    const expense = Number(value) * correctlyCurrency[0].ask;
-    const calc = (parseInt(despesas * precision, 10)
-    + parseInt(expense * precision, 10)) / precision;
 
-    // console.log(calc);
     const { description, method, tag } = this.state;
-    walletAction({ id, description, method, tag, value, currency, exchangeRates },
-      calc);
+    walletAction({ id, description, method, tag, value, currency, exchangeRates });
 
     this.setState(({
       id: id + 1,
@@ -155,7 +147,6 @@ class Currency extends Component {
 
   render() {
     const { expenses } = this.props;
-    const { despesas } = this.props;
     return (
       <div>
         {this.renderAddExpenses()}
@@ -164,7 +155,6 @@ class Currency extends Component {
           { expenses.map((expense) => (<ExpensesTable
             expense={ expense }
             key={ expense.id }
-            despesas={ despesas }
           />))}
         </table>
       </div>
@@ -173,18 +163,16 @@ class Currency extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  walletAction: (expenses, despesas) => dispatch(walletExpenses(expenses, despesas)),
+  walletAction: (expenses) => dispatch(walletExpenses(expenses)),
 });
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
-  despesas: state.wallet.despesas,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Currency);
 
 Currency.propTypes = {
-  expenses: PropTypes.objectOf(String).isRequired,
+  expenses: PropTypes.objectOf(PropTypes.string).isRequired,
   walletAction: PropTypes.func.isRequired,
-  despesas: PropTypes.number.isRequired,
 };
