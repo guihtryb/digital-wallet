@@ -11,6 +11,7 @@ class Wallet extends React.Component {
 
     this.createLogin = this.createLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleExpenses = this.handleExpenses.bind(this);
   }
 
   createLogin() {
@@ -27,8 +28,29 @@ class Wallet extends React.Component {
     });
   }
 
+  handleExpenses() {
+    const { expenses } = this.props;
+    const precision = 100;
+
+    const expensesArray = expenses.map(({ exchangeRates,
+      currency, value }) => {
+      const currencies = Object.values(exchangeRates);
+      const correctCurrency = currencies.filter((curr) => curr.code === currency);
+      const calc = Number(value) * correctCurrency[0].ask;
+      const correctExpense = parseInt(calc * precision, 10) / precision;
+      return correctExpense;
+    });
+    if (expenses.length) {
+      const totalExpenses = parseInt(expensesArray
+        .reduce((a, b) => a + b) * precision, 10) / precision;
+      return totalExpenses;
+    }
+    return 0;
+  }
+
   render() {
-    const { email, despesas } = this.props;
+    this.handleExpenses();
+    const { email } = this.props;
     const toMatch = email.indexOf('@');
     let user;
     if (email) {
@@ -42,7 +64,7 @@ class Wallet extends React.Component {
           <span data-testid="email-field">{`Email: ${email}`}</span>
           <div className="expenses-container">
             <span data-testid="total-field">
-              {`Despesa Total: R$ ${!despesas ? 0 : despesas}` }
+              {`Despesa Total: R$ ${this.handleExpenses()}` }
             </span>
             <span data-testid="header-currency-field"> BRL</span>
           </div>
@@ -55,7 +77,6 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  despesas: state.wallet.despesas,
   expenses: state.wallet.expenses,
 });
 
@@ -63,5 +84,5 @@ export default connect(mapStateToProps)(Wallet);
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
-  despesas: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

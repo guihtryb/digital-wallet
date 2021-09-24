@@ -76,7 +76,7 @@ class Currency extends Component {
     const calc = (parseInt(despesas * precision, 10)
     + parseInt(expense * precision, 10)) / precision;
 
-    console.log(calc);
+    // console.log(calc);
     const { description, method, tag } = this.state;
     walletAction({ id, description, method, tag, value, currency, exchangeRates },
       calc);
