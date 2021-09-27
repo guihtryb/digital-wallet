@@ -1,29 +1,68 @@
-.expenses-table th {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 6px;
-  padding: 15px 20px;
-  white-space: pre-wrap;
-  width: 70%;
+@media only screen and ( min-width: 1190px ) {
+  .expenses-table {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .expenses-table th{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 15px 20px;
+    width: 110px;
+    white-space: pre-wrap;
+  }
+
+  .expenses-table td {
+    border: 1px solid #212121;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .delete-button {
+    background-color: rgb(19, 18, 18);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    margin: 10px 45px;
+    padding: 8px 12px;
+  }
+
+  .delete-button:hover {
+    background-color: black;
+    transition: 0.8s;
+  }
 }
 
-.expenses-table td {
-  border: 1px solid #212121;
-  border-radius: 4px;
-  padding: 10px 20px;
-  text-align: center;
-}
+@media only screen and ( max-width: 1190px ) {
+  .expenses-table {
+    white-space: pre-wrap;
+    display: inline-block;
+  }
+  .expenses-table th{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 15px 5px;
+  }
+  .expenses-table td {
+    border: 1px solid #212121;
+    border-radius: 4px;
+    text-align: center;
+  }
 
-.delete-button {
-  background-color: black;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  margin: 10px 45px;
-  padding: 8px 12px;
-}
+  .delete-button {
+    background-color: rgb(19, 18, 18);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    margin: 10px 45px;
+    padding: 8px 12px;
+  }
 
-.delete-button:hover {
-  border: 4px solid rgb(78, 77, 77);
-  transition: 0.2s;
+  .delete-button:hover {
+    background-color: black;
+    transition: 0.8s;
+  }
 }

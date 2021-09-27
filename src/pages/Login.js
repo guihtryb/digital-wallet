@@ -3,7 +3,7 @@ import '../Styles/Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserLogin } from '../actions/index';
-import LoginLogo from '../Login.png';
+import LoginLogo from '../LogoTest.png';
 
 class Login extends Component {
   constructor(props) {
@@ -63,38 +63,40 @@ class Login extends Component {
   render() {
     const { email, password, disabled } = this.state;
     return (
-      <div className="login-container">
+      <div className="login-screen">
         <img src={ LoginLogo } alt="Login logo" className="login-logo" />
-        <form onSubmit={ this.handleSubmit }>
-          <input
-            data-testid="email-input"
-            className="login-input"
-            type="email"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-            onKeyUp={ this.validForm }
-            placeholder="Email"
-          />
-          <input
-            data-testid="password-input"
-            className="login-input"
-            type="password"
-            name="password"
-            value={ password }
-            onChange={ this.handleChange }
-            onKeyUp={ this.validForm }
-            placeholder="Password"
-          />
-          <button
-            type="submit"
-            className="login-button"
-            disabled={ disabled }
-            onClick={ this.sendLogin }
-          >
-            Entrar
-          </button>
-        </form>
+        <div className="login-container">
+          <form onSubmit={ this.handleSubmit }>
+            <input
+              data-testid="email-input"
+              className="login-input"
+              type="email"
+              name="email"
+              value={ email }
+              onChange={ this.handleChange }
+              onKeyUp={ this.validForm }
+              placeholder="Email"
+            />
+            <input
+              data-testid="password-input"
+              className="login-input"
+              type="password"
+              name="password"
+              value={ password }
+              onChange={ this.handleChange }
+              onKeyUp={ this.validForm }
+              placeholder="Password"
+            />
+            <button
+              type="submit"
+              className="login-button"
+              disabled={ disabled }
+              onClick={ this.sendLogin }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

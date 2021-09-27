@@ -1,48 +1,187 @@
-.header-container {
-  align-items: center;
-  background-color: white;
-  border-bottom: 2px solid seagreen;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 4px 6px rgba(0, 100, 0, 0.6);
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-}
+@media screen and ( min-width : 952px) {
+  body {
+    background-image: linear-gradient(to right, white, rgb(77, 197, 47));
+  }
 
-.header-container img {
-  display: flex;
-  height: 70px;
-  width: 195px;
-}
+  .header-container {
+    align-items: center;
+    background-color: white;
+    border-bottom: 2px solid seagreen;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0, 100, 0, 0.6);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
 
-span:hover , .currency-container:hover {
-  color: seagreen;
-}
+  .header-container img {
+    display: flex;
+    height: 70px;
+    width: 195px;
+  }
 
-.wallet-container {
-  align-items: center;
-  background-color: rgb(21, 21, 21);
-  color: rgb(195, 198, 201);
-  display: flex;
-  flex-flow: row wrap;
-  font-size: 19px;
-  justify-content: center;
-  margin: 20px 0;
-  padding: 20px;
-}
+  span:hover , .currency-container:hover {
+    color: seagreen;
+  }
 
-.wallet-container input {
-  border: none;
-  border-radius: 6px;
-  margin: 10px 15px;
-  padding: 10px;
-}
+  .wallet-container {
+    align-items: center;
+    background-color: rgb(21, 21, 21);
+    color: rgb(175, 177, 180);
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 19px;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px;
+  }
 
-select {
-  margin: 0 5px;
-}
+  .wallet-container input {
+    border: none;
+    border-radius: 6px;
+    margin: 10px 15px;
+    padding: 10px;
+  }
 
-.wallet-style {
-  background-image: linear-gradient(to right, white, rgb(124, 236, 161));
-  margin: 0;
+  .wallet-container input:focus {
+    outline: none ;
+  }
+
+  select {
+    height: 35px;
+    margin: 5px 15px;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(228, 227, 233);
+  }
+
+  select:focus {
+    outline: none;
+  }
+
+  .wallet-style {
+    background-image: linear-gradient(to right, white, rgb(77, 197, 47));
+    margin: 0;
+  }
+
+  .add-button {
+    background-color: rgb(84, 143, 84);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px;
+    border: none;
+  }
+
+  .add-button:hover {
+    background-color: rgb(49, 173, 49);
+    transition: 0.5s;
+  }
+}
+@media screen and ( max-width : 952px) {
+  .header-container {
+    align-items: center;
+    background-color: white;
+    border-bottom: 2px solid seagreen;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0, 100, 0, 0.6);
+    display: inline-block;
+    justify-content: space-around;
+    padding: 10px;
+    width: 932px;
+  }
+
+  .header-container img {
+    height: 70px;
+    width: 195px;
+    position: relative;
+    left: 200px;
+    top: 6px
+  }
+
+  span:hover , .currency-container:hover {
+    color: seagreen;
+  }
+
+  #user {
+    position: relative;
+    left: 70px;
+    bottom: 18px;
+  }
+
+  #user-email {
+    position: relative;
+    left: 270px;
+    bottom: 19px;
+  }
+
+  #total-field {
+    position: relative;
+    left: 584.5px;
+    bottom: 8px;
+  }
+
+  #currency {
+    position: relative;
+    left: 588px;
+    bottom: 8px;
+
+  }
+  
+
+  .wallet-container {
+    align-items: center;
+    color: rgb(175, 177, 180);
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 19px;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px;
+  }
+
+  .wallet-container input {
+    border: none;
+    border-radius: 6px;
+    margin: 10px 15px;
+    padding: 10px;
+  }
+
+  .wallet-container input:focus {
+    outline: none ;
+  }
+
+  select {
+    height: 35px;
+    margin: 5px 15px;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(228, 227, 233);
+  }
+
+  select:focus {
+    outline: none;
+  }
+
+  .wallet-style {
+    min-width: 950px;
+    background-image: linear-gradient(to right, white, rgb(77, 197, 47));
+    margin: 0;
+  }
+
+  .add-button {
+    background-color: rgb(84, 143, 84);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px;
+    border: none;
+  }
+
+  .add-button:hover {
+    background-color: rgb(49, 173, 49);
+    transition: 0.5s;
+  }
 }

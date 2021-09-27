@@ -7,7 +7,7 @@ export default class AddExpenseButton extends Component {
     return (
       <div>
         <button className="add-button" type="submit" onClick={ addExpense }>
-          Adicionar despesa
+          adicionar despesa
         </button>
       </div>
     );

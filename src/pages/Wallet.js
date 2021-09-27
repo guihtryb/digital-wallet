@@ -59,14 +59,14 @@ class Wallet extends React.Component {
     return (
       <div className="wallet-style">
         <header className="header-container">
-          <span>{ user }</span>
+          <span id="user">{ user }</span>
           <img src={ headerLogo } alt="header Logo" />
-          <span data-testid="email-field">{`Email: ${email}`}</span>
+          <span id="user-email" data-testid="email-field">{`Email: ${email}`}</span>
           <div className="expenses-container">
-            <span data-testid="total-field">
+            <span data-testid="total-field" id="total-field">
               {`Despesa Total: R$ ${this.handleExpenses()}` }
             </span>
-            <span data-testid="header-currency-field"> BRL</span>
+            <span data-testid="header-currency-field" id="currency"> BRL</span>
           </div>
         </header>
         <Currency />

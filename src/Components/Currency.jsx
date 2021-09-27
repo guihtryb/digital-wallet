@@ -5,6 +5,7 @@ import { walletExpenses } from '../actions/index';
 import AddExpenseButton from './AddExpenseButton';
 import ExpensesTable from './ExpensesTable';
 import '../Styles/ExpensesTable.css';
+import '../Styles/Currency.css';
 
 class Currency extends Component {
   constructor() {
@@ -140,7 +141,7 @@ class Currency extends Component {
         <th>Câmbio utilizado</th>
         <th>Valor convertido</th>
         <th>Moeda de conversão</th>
-        <th>Editar/Excluir</th>
+        <th>Excluir</th>
       </tr>
     );
   }
