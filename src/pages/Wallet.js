@@ -50,7 +50,7 @@ class Wallet extends React.Component {
 
   render() {
     this.handleExpenses();
-    const { email } = this.props;
+    const email = localStorage.getItem('email');
     const toMatch = email.indexOf('@');
     let user;
     if (email) {
@@ -58,7 +58,7 @@ class Wallet extends React.Component {
     }
     return (
       <div className="wallet-style">
-        <Header user={ user } handleExpenses={ this.handleExpenses } />
+        <Header user={ user } email={ email } handleExpenses={ this.handleExpenses } />
         <Currency />
       </div>
     );

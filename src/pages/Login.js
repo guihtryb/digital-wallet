@@ -43,7 +43,7 @@ class Login extends Component {
     const { email } = this.state;
 
     const { history, UserLoginAction } = this.props;
-
+    localStorage.setItem('email', email);
     UserLoginAction(email);
 
     history.push('/carteira');
