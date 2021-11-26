@@ -26,8 +26,8 @@ class Currency extends Component {
     this.addExpense = this.addExpense.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
-    this.renderAddExpenses = this.renderAddExpenses.bind(this);
-    this.renderExpenseHeader = this.renderExpenseHeader.bind(this);
+    this.renderExpenseBoard = this.renderExpenseBoard.bind(this);
+    this.renderExpensesTableHeader = this.renderExpensesTableHeader.bind(this);
   }
 
   componentDidMount() {
@@ -81,7 +81,7 @@ class Currency extends Component {
     }));
   }
 
-  renderAddExpenses() {
+  renderExpenseBoard() {
     const { value, description, currency, method, tag, exchangeRates } = this.state;
     const { handleChange, addExpense, handleSubmit } = this;
     const paymentMethods = ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'];
@@ -89,45 +89,47 @@ class Currency extends Component {
     const currencyCodes = Object.values(exchangeRates);
 
     return (
-      <form className="wallet-container" onSubmit={ handleSubmit }>
-        <ExpensesInput
-          name="value"
-          type="number"
-          info={ value }
-          onChange={ handleChange }
-        />
-        <ExpensesInput
-          name="description"
-          type="text"
-          info={ description }
-          onChange={ handleChange }
-        />
-        <ExpensesSelect
-          name="currency"
-          onChange={ handleChange }
-          info={ currency }
-          data={ currencyCodes }
-        />
-        <ExpensesSelect
-          name="payment method"
-          onChange={ handleChange }
-          info={ method }
-          data={ paymentMethods }
-        />
-        <ExpensesSelect
-          name="tag"
-          onChange={ handleChange }
-          info={ tag }
-          data={ tags }
-        />
-        <AddExpenseButton
-          addExpense={ addExpense }
-        />
+      <form onSubmit={ handleSubmit }>
+        <div className="wallet-container">
+          <ExpensesInput
+            name="value"
+            type="number"
+            info={ value }
+            onChange={ handleChange }
+          />
+          <ExpensesInput
+            name="description"
+            type="text"
+            info={ description }
+            onChange={ handleChange }
+          />
+          <ExpensesSelect
+            name="currency"
+            onChange={ handleChange }
+            info={ currency }
+            data={ currencyCodes }
+          />
+          <ExpensesSelect
+            name="payment method"
+            onChange={ handleChange }
+            info={ method }
+            data={ paymentMethods }
+          />
+          <ExpensesSelect
+            name="tag"
+            onChange={ handleChange }
+            info={ tag }
+            data={ tags }
+          />
+          <AddExpenseButton
+            addExpense={ addExpense }
+          />
+        </div>
       </form>
     );
   }
 
-  renderExpenseHeader() {
+  renderExpensesTableHeader() {
     const tableHeaders = ['Descrição', 'Tag', 'Método de pagamento',
       'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido',
       'Moeda de conversão', 'Excluir'];
@@ -146,9 +148,9 @@ class Currency extends Component {
     const { expenses } = this.props;
     return (
       <div>
-        { this.renderAddExpenses() }
+        { this.renderExpenseBoard() }
         <table className="expenses-table">
-          { this.renderExpenseHeader() }
+          { this.renderExpensesTableHeader() }
           { expenses.map((expense) => (<ExpensesTable
             expense={ expense }
             key={ expense.id }

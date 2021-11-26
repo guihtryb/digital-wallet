@@ -1,4 +1,7 @@
-@media screen and ( min-width : 952px) {
+/* stylelint-disable selector-max-specificity */
+
+@media screen and ( min-width : 952px ) {
+
   body {
     background-image: linear-gradient(to right, white, rgb(77, 197, 47));
   }
@@ -15,9 +18,8 @@
   }
 
   .header-container img {
-    display: flex;
     height: 70px;
-    width: 195px;
+    width: 200px;
   }
 
   span:hover , .currency-container:hover {
@@ -44,16 +46,16 @@
   }
 
   .wallet-container input:focus {
-    outline: none ;
+    outline: none;
   }
 
   select {
-    height: 35px;
-    margin: 5px 15px;
+    background-color: rgb(228, 227, 233);
     border: none;
     border-radius: 6px;
+    height: 35px;
+    margin: 5px 15px;
     padding: 5px;
-    background-color: rgb(228, 227, 233);
   }
 
   select:focus {
@@ -67,11 +69,11 @@
 
   .add-button {
     background-color: rgb(84, 143, 84);
+    border: none;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
     padding: 7px;
-    border: none;
   }
 
   .add-button:hover {
@@ -79,7 +81,9 @@
     transition: 0.5s;
   }
 }
-@media screen and ( max-width : 952px) {
+
+@media screen and ( max-width : 952px ) {
+
   .header-container {
     align-items: center;
     background-color: white;
@@ -94,10 +98,10 @@
 
   .header-container img {
     height: 70px;
-    width: 195px;
-    position: relative;
     left: 200px;
-    top: 6px
+    position: relative;
+    top: 6px;
+    width: 195px;
   }
 
   span:hover , .currency-container:hover {
@@ -105,41 +109,40 @@
   }
 
   #user {
-    position: relative;
-    left: 70px;
     bottom: 18px;
+    left: 70px;
+    position: relative;
   }
 
   #user-email {
-    position: relative;
-    left: 270px;
     bottom: 19px;
+    left: 270px;
+    position: relative;
   }
 
   #total-field {
-    position: relative;
-    left: 584.5px;
     bottom: 8px;
+    left: 584.5px;
+    position: relative;
   }
 
   #currency {
-    position: relative;
-    left: 588px;
     bottom: 8px;
+    left: 588px;
+    position: relative;
 
   }
-  
 
   .wallet-container {
     align-items: center;
     color: rgb(175, 177, 180);
     display: flex;
     flex-flow: row wrap;
-    font-size: 19px;
     justify-content: center;
     margin: 20px 0;
     padding: 20px;
   }
+
 
   .wallet-container input {
     border: none;
@@ -149,16 +152,16 @@
   }
 
   .wallet-container input:focus {
-    outline: none ;
+    outline: none;
   }
 
   select {
-    height: 35px;
-    margin: 5px 15px;
+    background-color: rgb(228, 227, 233);
     border: none;
     border-radius: 6px;
+    height: 35px;
+    margin: 5px 15px;
     padding: 5px;
-    background-color: rgb(228, 227, 233);
   }
 
   select:focus {
@@ -166,18 +169,18 @@
   }
 
   .wallet-style {
-    min-width: 950px;
     background-image: linear-gradient(to right, white, rgb(77, 197, 47));
     margin: 0;
+    min-width: 950px;
   }
 
   .add-button {
     background-color: rgb(84, 143, 84);
+    border: none;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
     padding: 7px;
-    border: none;
   }
 
   .add-button:hover {

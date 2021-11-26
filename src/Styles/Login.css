@@ -25,30 +25,30 @@ form input , button {
   outline: seagreen;
 }
 
-.login-screen{
+.login-screen {
   background-color: seagreen;
   height: 100vh;
 }
 
 .login-container {
   align-items: center;
-  display: flex;
-  flex-flow: column wrap;
   background-color: white;
-  padding: 30px;
   border-radius: 10px;
   box-shadow: 2px 4px 25px black;
-  width: 400px;
+  display: flex;
+  flex-flow: column wrap;
   margin: auto;
   margin-top: 25px;
+  padding: 30px;
+  width: 400px;
 }
 
 .login-logo {
   border-radius: 6px;
   display: flex;
   flex-grow: 2;
-  width: 350px;
   margin: auto;
+  width: 350px;
 }
 
 .login-button {
