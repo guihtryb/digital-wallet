@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../Styles/Wallet.css';
-import Currency from '../Components/Currency';
 import Header from '../Components/Header';
+import ExpensesTable from '../Components/ExpensesTable';
+import ExpensesBoard from '../Components/ExpensesBoard';
 
 class Wallet extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Wallet extends React.Component {
       const correctExpense = parseInt(calc * precision, 10) / precision;
       return correctExpense;
     });
+
     if (expenses.length) {
       const totalExpenses = parseInt(expensesArray
         .reduce((a, b) => a + b) * precision, 10) / precision;
@@ -59,7 +61,8 @@ class Wallet extends React.Component {
     return (
       <div className="wallet-style">
         <Header user={ user } email={ email } handleExpenses={ this.handleExpenses } />
-        <Currency />
+        <ExpensesBoard />
+        <ExpensesTable />
       </div>
     );
   }

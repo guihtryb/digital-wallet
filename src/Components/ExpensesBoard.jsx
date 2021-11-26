@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { walletExpenses } from '../actions/index';
+import PropTypes from 'prop-types';
 import AddExpenseButton from './AddExpenseButton';
-import ExpensesTable from './ExpensesTable';
-import '../Styles/ExpensesTable.css';
-import '../Styles/Currency.css';
 import ExpensesInput from './ExpensesInput';
+import { walletExpenses } from '../actions/index';
 import ExpensesSelect from './ExpensesSelect';
 
-class Currency extends Component {
+class ExpensesBoard extends Component {
   constructor() {
     super();
     this.state = {
@@ -21,24 +18,16 @@ class Currency extends Component {
       tag: 'Alimentação',
       exchangeRates: {},
     };
-    this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
+
+    this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
-    this.renderExpenseBoard = this.renderExpenseBoard.bind(this);
-    this.renderExpensesTableHeader = this.renderExpensesTableHeader.bind(this);
+    this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
   }
 
   componentDidMount() {
     // this.exchangeRatesRequisition();
-  }
-
-  handleChange({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
   }
 
   async exchangeRatesRequisition() {
@@ -54,17 +43,10 @@ class Currency extends Component {
     event.preventDefault();
   }
 
-  AddExpenseHelper() {
-    const { walletAction } = this.props;
-    const { value,
-      currency, id, description, method, tag, exchangeRates } = this.state;
-    walletAction({ id,
-      description,
-      method,
-      tag,
-      value,
-      currency,
-      exchangeRates,
+  handleChange({ target }) {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
     });
   }
 
@@ -81,7 +63,21 @@ class Currency extends Component {
     }));
   }
 
-  renderExpenseBoard() {
+  AddExpenseHelper() {
+    const { walletAction } = this.props;
+    const { value,
+      currency, id, description, method, tag, exchangeRates } = this.state;
+    walletAction({ id,
+      description,
+      method,
+      tag,
+      value,
+      currency,
+      exchangeRates,
+    });
+  }
+
+  render() {
     const { value, description, currency, method, tag, exchangeRates } = this.state;
     const { handleChange, addExpense, handleSubmit } = this;
     const paymentMethods = ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'];
@@ -110,7 +106,7 @@ class Currency extends Component {
             data={ currencyCodes }
           />
           <ExpensesSelect
-            name="payment method"
+            name="method"
             onChange={ handleChange }
             info={ method }
             data={ paymentMethods }
@@ -128,50 +124,14 @@ class Currency extends Component {
       </form>
     );
   }
-
-  renderExpensesTableHeader() {
-    const tableHeaders = ['Descrição', 'Tag', 'Método de pagamento',
-      'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido',
-      'Moeda de conversão', 'Excluir'];
-
-    return (
-      <tr>
-        { tableHeaders.map((header) => (
-          <th key={ header }>
-            { header }
-          </th>)) }
-      </tr>
-    );
-  }
-
-  render() {
-    const { expenses } = this.props;
-    return (
-      <div>
-        { this.renderExpenseBoard() }
-        <table className="expenses-table">
-          { this.renderExpensesTableHeader() }
-          { expenses.map((expense) => (<ExpensesTable
-            expense={ expense }
-            key={ expense.id }
-          />))}
-        </table>
-      </div>
-    );
-  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   walletAction: (expenses) => dispatch(walletExpenses(expenses)),
 });
 
-const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
-});
+export default connect(mapDispatchToProps)(ExpensesBoard);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Currency);
-
-Currency.propTypes = {
-  expenses: PropTypes.objectOf(PropTypes.string).isRequired,
+ExpensesBoard.propTypes = {
   walletAction: PropTypes.func.isRequired,
 };
