@@ -6,6 +6,8 @@ import AddExpenseButton from './AddExpenseButton';
 import ExpensesTable from './ExpensesTable';
 import '../Styles/ExpensesTable.css';
 import '../Styles/Currency.css';
+import ExpensesInput from './ExpensesInput';
+import ExpensesSelect from './ExpensesSelect';
 
 class Currency extends Component {
   constructor() {
@@ -20,7 +22,7 @@ class Currency extends Component {
       exchangeRates: {},
     };
     this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
-    this.chang = this.chang.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.addExpense = this.addExpense.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
@@ -29,10 +31,10 @@ class Currency extends Component {
   }
 
   componentDidMount() {
-    this.exchangeRatesRequisition();
+    // this.exchangeRatesRequisition();
   }
 
-  chang({ target }) {
+  handleChange({ target }) {
     const { name, value } = target;
     this.setState({
       [name]: value,
@@ -81,67 +83,61 @@ class Currency extends Component {
 
   renderAddExpenses() {
     const { value, description, currency, method, tag, exchangeRates } = this.state;
-    const { chang, addExpense, handleSubmit } = this;
+    const { handleChange, addExpense, handleSubmit } = this;
+    const paymentMethods = ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'];
+    const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
+    const currencyCodes = Object.values(exchangeRates);
+
     return (
       <form className="wallet-container" onSubmit={ handleSubmit }>
-        <label htmlFor="v">
-          Valor
-          <input type="number" name="value" id="v" onChange={ chang } value={ value } />
-        </label>
-        <label htmlFor="d">
-          Descrição
-          <input
-            type="text"
-            name="description"
-            id="d"
-            onChange={ this.chang }
-            value={ description }
-          />
-        </label>
-        <label htmlFor="c">
-          Moeda
-          <select name="currency" id="c" onChange={ this.chang } value={ currency }>
-            {Object.values(exchangeRates).map(({ code, name }) => (
-              <option key={ name }>
-                {code}
-              </option>))}
-          </select>
-        </label>
-        <label htmlFor="pt">
-          Método de pagamento
-          <select name="method" id="pt" onChange={ this.chang } value={ method }>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
-        </label>
-        <label htmlFor="ps">
-          Tag
-          <select name="tag" id="ps" onChange={ this.chang } value={ tag }>
-            <option value="Alimentacao">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Trasporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
-        </label>
-        <AddExpenseButton addExpense={ addExpense } />
+        <ExpensesInput
+          name="value"
+          type="number"
+          info={ value }
+          onChange={ handleChange }
+        />
+        <ExpensesInput
+          name="description"
+          type="text"
+          info={ description }
+          onChange={ handleChange }
+        />
+        <ExpensesSelect
+          name="currency"
+          onChange={ handleChange }
+          info={ currency }
+          data={ currencyCodes }
+        />
+        <ExpensesSelect
+          name="payment method"
+          onChange={ handleChange }
+          info={ method }
+          data={ paymentMethods }
+        />
+        <ExpensesSelect
+          name="tag"
+          onChange={ handleChange }
+          info={ tag }
+          data={ tags }
+        />
+        <AddExpenseButton
+          addExpense={ addExpense }
+        />
       </form>
     );
   }
 
   renderExpenseHeader() {
+    const tableHeaders = ['Descrição', 'Tag', 'Método de pagamento',
+      'Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido',
+      'Moeda de conversão', 'Excluir'];
+
     return (
       <tr>
-        <th>Descrição</th>
-        <th>Tag</th>
-        <th>Método de pagamento</th>
-        <th>Valor</th>
-        <th>Moeda</th>
-        <th>Câmbio utilizado</th>
-        <th>Valor convertido</th>
-        <th>Moeda de conversão</th>
-        <th>Excluir</th>
+        { tableHeaders.map((header) => (
+          <th key={ header }>
+            { header }
+          </th>)) }
       </tr>
     );
   }
@@ -150,7 +146,7 @@ class Currency extends Component {
     const { expenses } = this.props;
     return (
       <div>
-        {this.renderAddExpenses()}
+        { this.renderAddExpenses() }
         <table className="expenses-table">
           { this.renderExpenseHeader() }
           { expenses.map((expense) => (<ExpensesTable
