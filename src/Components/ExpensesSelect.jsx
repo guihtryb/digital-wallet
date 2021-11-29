@@ -16,7 +16,7 @@ export default class ExpensesSelect extends Component {
         >
           { name === 'currency' ? data.map(({ code }) => (
             <option key={ code }>
-              {name}
+              {code}
             </option>))
             : data.map((item) => (
               <option key={ item }>

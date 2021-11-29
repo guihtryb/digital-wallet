@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../Styles/TableCell.css';
 import { connect } from 'react-redux';
-import { deleteExpenseAction } from '../actions';
+import { deleteExpenseAction, editExpenseAction } from '../actions';
+import changes from '../utils/utils';
 
 class TableCell extends Component {
   constructor() {
     super();
     this.deleteExpense = this.deleteExpense.bind(this);
+    this.editExpense = this.editExpense.bind(this);
   }
 
   deleteExpense() {
@@ -17,30 +19,16 @@ class TableCell extends Component {
     deleteExpenses(arrayFiltered);
   }
 
-  // editExpense() {
-  //   const { expense: { id }, expenses, deleteExpense } = this.props;
-  //   const expenseToEdit = expenses.filter((exp) => exp.id === id);
-  // }
+  editExpense() {
+    // const { expense: { id }, expenses, deleteExpense } = this.props;
+    // const expenseToEdit = expenses.filter((exp) => exp.id === id);
+    const { editExpenses, expense: { id } } = this.props;
+    editExpenses('Editar despesa', id);
+  }
 
   render() {
     const { expense: { exchangeRates,
       currency, description, tag, method, value } } = this.props;
-    const changes = {
-      USD: 'Dólar Comercial',
-      CAD: 'Dólar Canadense',
-      EUR: 'Euro',
-      GBP: 'Libra Esterlina',
-      ARS: 'Peso',
-      BTC: 'Bitcoin',
-      LTC: 'Litecoin',
-      JPY: 'Yen',
-      CHF: 'Swiss',
-      AUD: 'Dólar Australiano',
-      CNY: 'Yuan',
-      ILS: 'Israeli New Shekew',
-      ETH: 'Ethereum',
-      XRP: 'Riple',
-    };
     const currencies = Object.values(exchangeRates);
     const correctCurrency = currencies.filter((curr) => curr.code === currency);
     const calc = Number(value) * correctCurrency[0].ask;
@@ -67,6 +55,14 @@ class TableCell extends Component {
           >
             Delete
           </button>
+          <button
+            type="button"
+            data-testid="edit-btn"
+            className="delete-button"
+            onClick={ this.editExpense }
+          >
+            Editar
+          </button>
         </td>
       </tr>
     );
@@ -76,6 +72,9 @@ class TableCell extends Component {
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenses: (expenses) => dispatch(
     deleteExpenseAction(expenses),
+  ),
+  editExpenses: (buttonText, idToEdit) => dispatch(
+    editExpenseAction(buttonText, idToEdit),
   ),
 });
 
@@ -89,4 +88,5 @@ TableCell.propTypes = {
   expenses: PropTypes.objectOf(PropTypes.string).isRequired,
   expense: PropTypes.objectOf(PropTypes.string).isRequired,
   deleteExpenses: PropTypes.func.isRequired,
+  editExpenses: PropTypes.func.isRequired,
 };

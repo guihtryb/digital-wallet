@@ -21,10 +21,10 @@ class Login extends Component {
 
   validForm() {
     const { password, email } = this.state;
-    const passwordLength = 6;
+    const passwordMinLength = 6;
 
     const errorCases = [
-      password.length < passwordLength,
+      password.length < passwordMinLength,
       !email.includes('@'),
       email.split('@').length > 2,
       !email.includes('.com'),

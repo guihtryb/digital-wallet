@@ -6,7 +6,7 @@ export default class ExpensesInput extends Component {
     const { name, type, info, onChange } = this.props;
     return (
       <label htmlFor={ name }>
-        { name }
+        { `${name[0].toUpperCase()}${name.substring(1, name.length)}` }
         <input
           type={ type }
           name={ name }

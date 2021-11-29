@@ -1,10 +1,14 @@
 /* stylelint-disable selector-max-specificity */
+button {
+  cursor: pointer;
+}
 
 @media screen and ( min-width : 952px ) {
 
   body {
     background-image: linear-gradient(to right, white, rgb(77, 197, 47));
   }
+
 
   .header-container {
     align-items: center;
@@ -171,8 +175,10 @@
 
   .wallet-style {
     background-image: linear-gradient(to right, white, rgb(77, 197, 47));
+    height: 100vh;
     margin: 0;
     min-width: 950px;
+    overflow-y: auto;
   }
 
   .add-button {

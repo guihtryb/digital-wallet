@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-export default class AddExpenseButton extends Component {
+class AddExpenseButton extends Component {
   render() {
-    const { addExpense } = this.props;
+    const { addExpense, buttonText } = this.props;
     return (
       <button className="add-button" type="submit" onClick={ addExpense }>
-        adicionar despesa
+        { buttonText }
       </button>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  buttonText: state.wallet.buttonText,
+});
+
+export default connect(mapStateToProps)(AddExpenseButton);
+
 AddExpenseButton.propTypes = {
   addExpense: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };

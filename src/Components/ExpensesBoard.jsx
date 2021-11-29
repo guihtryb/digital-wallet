@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AddExpenseButton from './AddExpenseButton';
 import ExpensesInput from './ExpensesInput';
-import { walletExpenses } from '../actions/index';
+import { deleteExpenseAction, editExpenseAction, walletExpenses } from '../actions/index';
 import ExpensesSelect from './ExpensesSelect';
 
 class ExpensesBoard extends Component {
@@ -22,12 +22,11 @@ class ExpensesBoard extends Component {
     this.exchangeRatesRequisition = this.exchangeRatesRequisition.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addExpense = this.addExpense.bind(this);
-    this.AddExpenseHelper = this.AddExpenseHelper.bind(this);
+    this.addOrEditExpenses = this.addOrEditExpenses.bind(this);
   }
 
   componentDidMount() {
-    // this.exchangeRatesRequisition();
+    this.exchangeRatesRequisition();
   }
 
   async exchangeRatesRequisition() {
@@ -50,36 +49,43 @@ class ExpensesBoard extends Component {
     });
   }
 
-  async addExpense() {
+  async addOrEditExpenses() {
     await this.exchangeRatesRequisition();
-    const { walletAction } = this.props;
+    const { walletAction, buttonText, idToEdit,
+      expenses, deleteExpenses, editExpenses } = this.props;
     const { value, currency, exchangeRates, id } = this.state;
 
     const { description, method, tag } = this.state;
-    walletAction({ id, description, method, tag, value, currency, exchangeRates });
+    if (buttonText === 'Adicionar despesa') {
+      walletAction({ id, description, method, tag, value, currency, exchangeRates });
+      this.setState(({
+        id: id + 1,
+      }));
+    } else {
+      let getExpenseToEdit = expenses.find((expense) => expense.id === idToEdit);
 
-    this.setState(({
-      id: id + 1,
-    }));
-  }
+      getExpenseToEdit = {
+        id: idToEdit,
+        description,
+        exchangeRates,
+        currency,
+        method,
+        tag,
+        value,
+      };
 
-  AddExpenseHelper() {
-    const { walletAction } = this.props;
-    const { value,
-      currency, id, description, method, tag, exchangeRates } = this.state;
-    walletAction({ id,
-      description,
-      method,
-      tag,
-      value,
-      currency,
-      exchangeRates,
-    });
+      const deleteOldValue = expenses.filter((expense) => expense.id !== idToEdit);
+      const expensesEdited = [...deleteOldValue, getExpenseToEdit];
+      expensesEdited.sort((a, b) => a.id - b.id);
+      console.log(deleteOldValue, expensesEdited);
+      deleteExpenses(expensesEdited);
+      editExpenses('Adicionar despesa');
+    }
   }
 
   render() {
     const { value, description, currency, method, tag, exchangeRates } = this.state;
-    const { handleChange, addExpense, handleSubmit } = this;
+    const { handleChange, addOrEditExpenses, handleSubmit } = this;
     const paymentMethods = ['Dinheiro', 'Cartão de Crédito', 'Cartão de Débito'];
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     const currencyCodes = Object.values(exchangeRates);
@@ -118,7 +124,7 @@ class ExpensesBoard extends Component {
             data={ tags }
           />
           <AddExpenseButton
-            addExpense={ addExpense }
+            addExpense={ addOrEditExpenses }
           />
         </div>
       </form>
@@ -126,12 +132,29 @@ class ExpensesBoard extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  walletAction: (expenses) => dispatch(walletExpenses(expenses)),
+const mapStateToProps = (state) => ({
+  buttonText: state.wallet.buttonText,
+  idToEdit: state.wallet.idToEdit,
+  expenses: state.wallet.expenses,
 });
 
-export default connect(mapDispatchToProps)(ExpensesBoard);
+const mapDispatchToProps = (dispatch) => ({
+  walletAction: (expenses) => dispatch(walletExpenses(expenses)),
+  deleteExpenses: (expenses) => dispatch(
+    deleteExpenseAction(expenses),
+  ),
+  editExpenses: (buttonText) => dispatch(
+    editExpenseAction(buttonText),
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesBoard);
 
 ExpensesBoard.propTypes = {
   walletAction: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  idToEdit: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(Object).isRequired,
+  deleteExpenses: PropTypes.func.isRequired,
+  editExpenses: PropTypes.func.isRequired,
 };

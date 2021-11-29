@@ -2,6 +2,7 @@
 export const LOGIN = 'LOGIN';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export function UserLogin(email) {
   return ({
@@ -27,6 +28,16 @@ export function deleteExpenseAction(expenses) {
     type: DELETE_EXPENSE,
     wallet: {
       expenses,
+    },
+  });
+}
+
+export function editExpenseAction(buttonText, idToEdit) {
+  return ({
+    type: EDIT_EXPENSE,
+    wallet: {
+      buttonText,
+      idToEdit,
     },
   });
 }
