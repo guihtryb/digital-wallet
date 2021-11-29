@@ -14,14 +14,13 @@ class TableCell extends Component {
 
   deleteExpense() {
     const { expense: { id } } = this.props;
-    const { deleteExpenses, expenses } = this.props;
+    const { deleteExpenses, editExpenses, expenses } = this.props;
     const arrayFiltered = expenses.filter((exp) => exp.id !== id);
+    if (arrayFiltered.length < 1) editExpenses('Adicionar despesa');
     deleteExpenses(arrayFiltered);
   }
 
   editExpense() {
-    // const { expense: { id }, expenses, deleteExpense } = this.props;
-    // const expenseToEdit = expenses.filter((exp) => exp.id === id);
     const { editExpenses, expense: { id } } = this.props;
     editExpenses('Editar despesa', id);
   }
