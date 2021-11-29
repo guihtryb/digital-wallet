@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a93e2d1880cee2c8da7359b32ed75496",
+    "revision": "662892636d9319a555cbe3b26e0303dc",
     "url": "/digital-wallet/index.html"
   },
   {
-    "revision": "869f1227cba7ead198e9",
-    "url": "/digital-wallet/static/css/main.e9f6ca48.chunk.css"
+    "revision": "a7d4298f5ff50d0e70ee",
+    "url": "/digital-wallet/static/css/main.fd8e2db6.chunk.css"
   },
   {
     "revision": "19b8f88ba9207def17c6",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/digital-wallet/static/js/2.2900c882.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "869f1227cba7ead198e9",
+    "revision": "a7d4298f5ff50d0e70ee",
     "url": "/digital-wallet/static/js/main.246baf45.chunk.js"
   },
   {

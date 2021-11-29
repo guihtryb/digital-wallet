@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/digital-wallet/static/css/main.e9f6ca48.chunk.css",
+    "main.css": "/digital-wallet/static/css/main.fd8e2db6.chunk.css",
     "main.js": "/digital-wallet/static/js/main.246baf45.chunk.js",
     "main.js.map": "/digital-wallet/static/js/main.246baf45.chunk.js.map",
     "runtime-main.js": "/digital-wallet/static/js/runtime-main.6d29fa4e.js",
@@ -8,9 +8,9 @@
     "static/js/2.2900c882.chunk.js": "/digital-wallet/static/js/2.2900c882.chunk.js",
     "static/js/2.2900c882.chunk.js.map": "/digital-wallet/static/js/2.2900c882.chunk.js.map",
     "index.html": "/digital-wallet/index.html",
-    "precache-manifest.9e960af8752ccf01416b747eb3be1d0c.js": "/digital-wallet/precache-manifest.9e960af8752ccf01416b747eb3be1d0c.js",
+    "precache-manifest.fc00a3369d728f8ddd8808e0c2be9eeb.js": "/digital-wallet/precache-manifest.fc00a3369d728f8ddd8808e0c2be9eeb.js",
     "service-worker.js": "/digital-wallet/service-worker.js",
-    "static/css/main.e9f6ca48.chunk.css.map": "/digital-wallet/static/css/main.e9f6ca48.chunk.css.map",
+    "static/css/main.fd8e2db6.chunk.css.map": "/digital-wallet/static/css/main.fd8e2db6.chunk.css.map",
     "static/js/2.2900c882.chunk.js.LICENSE.txt": "/digital-wallet/static/js/2.2900c882.chunk.js.LICENSE.txt",
     "static/media/LogoTest.png": "/digital-wallet/static/media/LogoTest.259e22ce.png",
     "static/media/headerLogo.jpg": "/digital-wallet/static/media/headerLogo.6899dee4.jpg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.6d29fa4e.js",
     "static/js/2.2900c882.chunk.js",
-    "static/css/main.e9f6ca48.chunk.css",
+    "static/css/main.fd8e2db6.chunk.css",
     "static/js/main.246baf45.chunk.js"
   ]
 }
