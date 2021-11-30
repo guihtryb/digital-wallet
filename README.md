@@ -6,6 +6,11 @@
 </p>
 
 <div align="center">
+  <img src="src/assets/loginPic.png" width="420px" style="border-radius: 12px; margin: 0 4px">
+  <img src="src/assets/walletPic.png" width="420px" style="border-radius: 12px">
+</div>
+
+<div align="center">
 
 ## Techs used 
 ![React](https://img.shields.io/badge/-Redux-000000?style=flat&logo=react)
