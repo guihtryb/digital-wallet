@@ -1,7 +1,9 @@
 <h1 align="center"> Digital Wallet </h1>
 
-<p align="center"> A digital wallet that registers, calculates and converts expenses in different currencies to a unique one. </p>
-<p align="center"> The user also can edit, remove and add new expenses in his wallet </p>
+<p align="center"> A digital wallet that registers, calculates and converts expenses in different currencies to a unique one.
+  <br />
+  The user also can edit, remove and add new expenses in his wallet
+</p>
 
 <div align="center">
 
