@@ -7,7 +7,12 @@ const INITIAL_STATE = {
   buttonText: 'Adicionar despesa',
 };
 
-function walletReducer(state = INITIAL_STATE, action) {
+const ACTION = {
+  type: 'ADD_EXPENSE',
+  wallet: {},
+};
+
+function walletReducer(state = INITIAL_STATE, action = ACTION) {
   const { type, wallet } = action;
   switch (type) {
   case ADD_EXPENSE:
@@ -25,8 +30,6 @@ function walletReducer(state = INITIAL_STATE, action) {
   case EDIT_EXPENSE:
     return {
       ...state,
-      // currencies: wallet.currencies,
-      // expenses: wallet.expenses,
       buttonText: wallet.buttonText,
       idToEdit: wallet.idToEdit,
     };
