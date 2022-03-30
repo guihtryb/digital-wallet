@@ -5,18 +5,22 @@ const INITIAL_STATE = {
   email: '',
 };
 
-function userReducer(state = INITIAL_STATE, action) {
+const ACTION = {
+  type: 'LOGIN',
+  user: {
+    email: 'user@email.com',
+  },
+};
+
+function userReducer(state = INITIAL_STATE, action = ACTION) {
   const { type, user } = action;
-  switch (type) {
-  case LOGIN:
+  if (type === LOGIN) {
     return {
       ...state,
       email: user.email,
     };
-
-  default:
-    return state;
   }
+  return state;
 }
 
 export default userReducer;
