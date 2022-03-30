@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../Styles/TableCell.css';
 import { connect } from 'react-redux';
 import { deleteExpenseAction, editExpenseAction } from '../actions';
-import changes from '../utils/utils';
+import changes from '../utils/changes';
 
 class TableCell extends Component {
   constructor() {
