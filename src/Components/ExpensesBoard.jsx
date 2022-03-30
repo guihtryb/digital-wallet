@@ -62,9 +62,7 @@ class ExpensesBoard extends Component {
         id: id + 1,
       }));
     } else {
-      let getExpenseToEdit = expenses.find((expense) => expense.id === idToEdit);
-
-      getExpenseToEdit = {
+      const getExpenseToEdit = {
         id: idToEdit,
         description,
         exchangeRates,
