@@ -46,7 +46,7 @@ class Login extends Component {
     localStorage.setItem('email', email);
     UserLoginAction(email);
 
-    history.push('/carteira');
+    history.push('/digital-wallet/carteira');
   }
 
   handleChange({ target }) {
