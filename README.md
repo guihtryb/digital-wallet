@@ -1,6 +1,6 @@
 <h1 align="center"> Digital Wallet </h1>
 
-<p align="center"> A digital wallet that registers, calculates and converts expenses in different currencies to a unique one.
+<p align="center"> A <a href="https://guihtryb.github.io/digital-wallet/"> digital wallet</a> that registers, calculates and converts expenses in different currencies to a unique one.
   <br />
   The user also can edit, remove and add new expenses in his wallet
 </p>
