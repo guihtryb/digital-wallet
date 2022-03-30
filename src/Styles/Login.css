@@ -13,7 +13,7 @@ form input , button {
   height: 25px;
   margin: 5px 15px;
   padding: 10px;
-  width: 240px;
+  width: 48vw;
 }
 
 .login-input:hover {
@@ -40,7 +40,7 @@ form input , button {
   margin: auto;
   margin-top: 25px;
   padding: 30px;
-  width: 400px;
+  width: 62vw;
 }
 
 .login-logo {
@@ -57,7 +57,7 @@ form input , button {
   color: white;
   font-size: 23px;
   font-weight: 700;
-  margin: 10px 15px;
+  margin: 10px auto;
   padding: 12px;
-  width: 264px;
+  width: 50vw;
 }

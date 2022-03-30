@@ -1,6 +1,11 @@
 /* stylelint-disable selector-max-specificity */
-button {
+button , span {
   cursor: pointer;
+}
+
+
+.wallet-style {
+  height: 100vh;
 }
 
 @media screen and ( min-width : 952px ) {

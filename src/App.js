@@ -4,11 +4,10 @@ import Login from './pages/Login';
 import Wallet from './pages/Wallet';
 
 function App() {
-  // Initing project!
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route exact path="/carteira" component={ Wallet } />
+      <Route exact path="/digital-wallet" component={ Login } />
+      <Route exact path="/digital-wallet/carteira" component={ Wallet } />
     </Switch>
   );
 }
